@@ -2,23 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/homeFragment"
+    app:startDestination="@id/queueFragment"
     android:id="@+id/navigation_bottom_nav">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.kaamchori.Home"
-        android:label="Home"
-        tools:layout="@layout/fragment_home"/>
+        android:id="@+id/queueFragment"
+        android:name="com.example.kaamchori.Queue"
+        android:label="Queue"
+        tools:layout="@layout/fragment_queue"/>
 
     <fragment
-        android:id="@+id/dayWiseFragment"
-        android:name="com.example.kaamchori.DayWise"
-        android:label="Daywise"
-        tools:layout="@layout/fragment_day_wise"/>
+        android:id="@+id/tasksFragment"
+        android:name="com.example.kaamchori.Tasks"
+        android:label="Tasks"
+        tools:layout="@layout/fragment_tasks"/>
 
     <fragment
-    android:id="@+id/listsFragment"
+        android:id="@+id/listsFragment"
         android:name="com.example.kaamchori.Lists"
         android:label="Lists"
         tools:layout="@layout/fragment_lists"/>

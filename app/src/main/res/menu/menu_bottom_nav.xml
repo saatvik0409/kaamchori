@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Home"
-        android:id="@+id/homeFragment"
-        android:icon="@drawable/vec_home"/>
+        android:title="Queue"
+        android:id="@+id/queueFragment"
+        android:icon="@drawable/selector_bottom_nav"/>
 
     <item
         android:title="Lists"
         android:id="@+id/listsFragment"
-        android:icon="@drawable/vec_lists"/>
+        android:icon="@drawable/selector_lists"/>
 
     <item
-        android:title="Daywise"
-        android:id="@+id/dayWiseFragment"
-        android:icon="@drawable/vec_daywise"/>
+        android:title="Tasks"
+        android:id="@+id/tasksFragment"
+        android:icon="@drawable/selector_daywise"/>
 
 </menu>
