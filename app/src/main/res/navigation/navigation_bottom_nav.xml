@@ -23,4 +23,10 @@
         android:label="Lists"
         tools:layout="@layout/fragment_lists"/>
 
+    <fragment
+        android:id="@+id/recurringTasksFragment"
+        android:name="com.example.kaamchori.Recurring_Tasks"
+        android:label="RecurringTasks"
+        tools:layout="@layout/fragment_recurring_tasks"/>
+
 </navigation>
