@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_white"
     tools:context=".Recurring_Tasks">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,19 +18,22 @@
             android:id="@+id/recurring_tasks_text_title"
             android:text="@string/Recurring_Tasks"
             android:textSize="40sp"
-            android:fontFamily="monospace"
+            android:fontFamily="sans-serif-black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="15dp"/>
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/recurring_tasks_rv"
             app:layout_constraintTop_toBottomOf="@id/recurring_tasks_text_title"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="15dp"/>
-
-
+            android:layout_margin="15dp"
+            android:clipToPadding="false"
+            android:paddingBottom="75dp"/>
+        <!--I have done this to ^^^^^^^^ to avoid bottom navigation menu hiding the last item of recycler view problem        -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="56dp"
