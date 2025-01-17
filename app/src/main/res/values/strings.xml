@@ -6,4 +6,7 @@
     <string name="test_button">Test button</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sample_date">10/11/12</string>
+    <string name="r_period">R_Period</string>
+    <string name="status">Status</string>
 </resources>
