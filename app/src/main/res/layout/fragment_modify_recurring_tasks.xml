@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_white"
+    tools:context=".FragmentModifyRecurringTask">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/modify_recurring_task_title"
+            android:hint="@string/TaskDescription"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="25sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="100dp"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:id="@+id/modify_recurring_task_start_date"
+            android:layout_height="wrap_content"
+            android:hint="@string/startDate"
+            app:layout_constraintTop_toBottomOf="@id/modify_recurring_task_title"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="30dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:id="@+id/modify_recurring_task_end_date"
+            android:layout_height="wrap_content"
+            android:hint="@string/endDate"
+            app:layout_constraintTop_toBottomOf="@id/modify_recurring_task_start_date"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="30dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:id="@+id/modify_recurring_task_frequency"
+            android:layout_height="wrap_content"
+            android:hint="@string/frequency"
+            app:layout_constraintTop_toBottomOf="@id/modify_recurring_task_end_date"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="30dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:id="@+id/item_recurring_tasks_status"
+            android:layout_height="wrap_content"
+            android:hint="@string/status"
+            app:layout_constraintTop_toBottomOf="@id/modify_recurring_task_frequency"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="30dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>

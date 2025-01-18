@@ -9,4 +9,8 @@
     <string name="sample_date">10/11/12</string>
     <string name="r_period">R_Period</string>
     <string name="status">Status</string>
+    <string name="TaskDescription">Task Description</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
+    <string name="frequency">Frequency</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaamchori.adapters.AdapterRecurringTasks
@@ -47,9 +48,13 @@ class Recurring_Tasks : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        requireActivity().supportFragmentManager.popBackStack()
         rvRecurringTasks = view.findViewById(R.id.recurring_tasks_rv)
-        adpRecurringTasks = AdapterRecurringTasks(generateRecurringTasks())
+        adpRecurringTasks = AdapterRecurringTasks(generateRecurringTasks()){item ->
+            findNavController().navigate(R.id.fragmentModifyRecurringTasks)
+        }
         rvRecurringTasks.adapter = adpRecurringTasks
         rvRecurringTasks.layoutManager =LinearLayoutManager(requireContext())
+
+
     }
 
 

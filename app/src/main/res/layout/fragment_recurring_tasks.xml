@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="15dp"
             android:clipToPadding="false"
-            android:paddingBottom="75dp"/>
+            android:paddingBottom="85dp"/>
         <!--I have done this to ^^^^^^^^ to avoid bottom navigation menu hiding the last item of recycler view problem        -->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
