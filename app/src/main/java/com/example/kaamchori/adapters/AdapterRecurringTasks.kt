@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 
 class AdapterRecurringTasks (
     private val recurringTasksList : List<StructureRecurringTasks>,
-    private val onItemClick: (StructureRecurringTasks) -> Unit
+    private val onItemClick: (Int) -> Unit
 ) : RecyclerView.Adapter<AdapterRecurringTasks.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -21,7 +21,7 @@ class AdapterRecurringTasks (
         val tv_status : TextView = itemView.findViewById(R.id.item_recurring_tasks_status)
         val tv_frequency: TextView = itemView.findViewById(R.id.item_recurring_tasks_cycle)
 
-        fun bind(item : StructureRecurringTasks){
+        fun bind(item : Int){
             itemView.setOnClickListener{
                 onItemClick(item)
             }
@@ -45,6 +45,6 @@ class AdapterRecurringTasks (
         holder.tv_end_date.text = SimpleDateFormat("dd/MM/yy").format(currentTask.endDate)
         holder.tv_status.text = currentTask.status.toString()
         holder.tv_frequency.text = currentTask.frequency.toString()
-        holder.bind(currentTask)
+        holder.bind(position)
     }
 }

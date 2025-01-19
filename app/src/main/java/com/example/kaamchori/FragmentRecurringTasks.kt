@@ -1,6 +1,7 @@
 package com.example.kaamchori
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaamchori.adapters.AdapterRecurringTasks
 import com.example.kaamchori.models.StructureRecurringTasks
+import com.example.kaamchori.singletonClass.GlobalVariables
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.Date
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +31,7 @@ class FragmentRecurringTasks : Fragment() {
     private var param2: String? = null
     private lateinit var rvRecurringTasks : RecyclerView
     private lateinit var adpRecurringTasks : AdapterRecurringTasks //Note that always follow this convention for naming class -> Full adapter, for variable -> adp
+    private lateinit var fabNewRecurringTask : FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,76 +52,23 @@ class FragmentRecurringTasks : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        requireActivity().supportFragmentManager.popBackStack()
         rvRecurringTasks = view.findViewById(R.id.recurring_tasks_rv)
-        adpRecurringTasks = AdapterRecurringTasks(generateRecurringTasks()){item ->
-            findNavController().navigate(R.id.fragmentModifyRecurringTasks)
+        fabNewRecurringTask = view.findViewById(R.id.recurring_tasks_fab)
+        adpRecurringTasks = AdapterRecurringTasks(GlobalVariables.recurringTasksList){item ->
+            Log.i(TAG,"The item argument is ${item}")
+            val newBundle = Bundle()
+            newBundle.putInt("clickedRecurringTask",item)
+            findNavController().navigate(R.id.fragmentModifyRecurringTasks, newBundle)
         }
         rvRecurringTasks.adapter = adpRecurringTasks
         rvRecurringTasks.layoutManager =LinearLayoutManager(requireContext())
 
-
+        fabNewRecurringTask.setOnClickListener {
+            findNavController().navigate(R.id.fragmentNewRecurringTask)
+        }
     }
 
 
-    fun generateRecurringTasks(): List<StructureRecurringTasks> {
-        return listOf(
-            StructureRecurringTasks(
-                taskDescription = "Water the plants",
-                startDate = Date(), // Current date
-                endDate = Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-                frequency = 24, // Every 24 hours
-                status = true
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Take out the trash",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
-                frequency = 168, // Weekly (168 hours)
-                status = false
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Go jogging",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 14 * 24 * 60 * 60 * 1000), // 14 days from now
-                frequency = 48, // Every 48 hours
-                status = true
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Clean the house",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 21 * 24 * 60 * 60 * 1000), // 21 days from now
-                frequency = 168, // Weekly
-                status = true
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Pay electricity bill",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 60 * 24 * 60 * 60 * 1000), // 60 days from now
-                frequency = 720, // Monthly (approx 720 hours)
-                status = false
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Check email",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-                frequency = 12, // Every 12 hours
-                status = true
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Grocery shopping",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 28 * 24 * 60 * 60 * 1000), // 28 days from now
-                frequency = 168, // Weekly
-                status = true
-            ),
-            StructureRecurringTasks(
-                taskDescription = "Visit dentist",
-                startDate = Date(),
-                endDate = Date(System.currentTimeMillis() + 90 * 24 * 60 * 60 * 1000), // 90 days from now
-                frequency = 2160, // Quarterly (approx 2160 hours)
-                status = false
-            )
-        )
-    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -128,6 +79,7 @@ class FragmentRecurringTasks : Fragment() {
          * @return A new instance of fragment Recurring_Tasks.
          */
         // TODO: Rename and change types and number of parameters
+        private val TAG = "FRAGMENT_RECURRING_TASKS"
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentRecurringTasks().apply {

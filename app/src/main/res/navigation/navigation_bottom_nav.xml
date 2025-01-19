@@ -31,8 +31,14 @@
 
     <fragment
         android:id="@+id/fragmentModifyRecurringTasks"
-        android:name="com.example.kaamchori.FragmentModifyRecurringTask"
+        android:name="com.example.kaamchori.FragmentRecurringTaskModify"
         android:label="ModifyRecurringTasks"
+        tools:layout="@layout/fragment_modify_recurring_tasks"/>
+
+    <fragment
+        android:id="@+id/fragmentNewRecurringTask"
+        android:name="com.example.kaamchori.FragmentRecurringTasksNew"
+        android:label="NewRecurringTask"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 
 </navigation>
