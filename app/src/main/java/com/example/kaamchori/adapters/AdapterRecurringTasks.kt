@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaamchori.R
-import com.example.kaamchori.Recurring_Tasks
 import com.example.kaamchori.models.StructureRecurringTasks
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 
 class AdapterRecurringTasks (
