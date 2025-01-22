@@ -18,11 +18,15 @@ import com.example.kaamchori.databinding.LayoutMainActivityBinding
 import com.example.kaamchori.ui.theme.KaamchoriTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import java.util.Date
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,13 +51,14 @@ class MainActivity : AppCompatActivity() {
 
         // Get reference to the BottomNavigationView from the layout
         val navView: BottomNavigationView = binding.bottomNavView
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // Set item icon tint list to null (optional, to disable default icon tinting)
 //        navView.itemIconTintList = null
 
         // Set up the BottomNavigationView with the NavController for navigation
         navView.setupWithNavController(navController)
         GlobalVariables.recurringTasksList = generateRecurringTasks()
+        GlobalVariables.oneTimeTasksList = generateRandomTasks()
     }
 
 
@@ -117,6 +122,31 @@ class MainActivity : AppCompatActivity() {
             )
         )
     }
+
+    fun generateRandomTasks(): MutableList<StructureOneTimeTasks> {
+        val taskDescriptions = listOf(
+            "Write a report",
+            "Attend a meeting",
+            "Complete a project",
+            "Make a phone call",
+            "Send an email",
+            "Schedule a doctor's appointment",
+            "Go grocery shopping",
+            "Exercise",
+            "Read a book",
+            "Clean the house"
+        )
+
+        return MutableList(10) {
+            StructureOneTimeTasks(
+                taskDescription = taskDescriptions[Random.nextInt(taskDescriptions.size)],
+                startDate = Date(System.currentTimeMillis() - Random.nextInt(1000 * 60 * 60 * 24)), // Random start date within last 24 hours
+                endDate = Date(System.currentTimeMillis() + Random.nextInt(1000 * 60 * 60 * 24 * 7)), // Random end date within next 7 days
+                status = Random.nextBoolean() // Randomly set status as completed or not
+            )
+        }
+    }
+
 
 }
 

@@ -41,4 +41,17 @@
         android:label="NewRecurringTask"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 
+    <fragment
+        android:id="@+id/oneTimeTasksFragment"
+        android:name="com.example.kaamchori.FragmentOneTimeTask"
+        android:label="One Time Task"
+        tools:layout="@layout/fragment_recurring_tasks"/>
+
+    <fragment
+        android:id="@+id/oneTimeTasksModifyFragment"
+        android:name="com.example.kaamchori.FragmentOneTimeTasksModify"
+        android:label="One Time Task Modify"
+        tools:layout="@layout/fragment_modify_recurring_tasks"/>
+
+
 </navigation>

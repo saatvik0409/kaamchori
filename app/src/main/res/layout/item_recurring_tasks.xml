@@ -14,6 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLength="15"
             android:id="@+id/item_recurring_tasks_title"
             android:text="@string/Recurring_Tasks"
             android:textSize="22sp"

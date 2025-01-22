@@ -32,13 +32,7 @@ class FragmentRecurringTasks : Fragment() {
     private lateinit var rvRecurringTasks : RecyclerView
     private lateinit var adpRecurringTasks : AdapterRecurringTasks //Note that always follow this convention for naming class -> Full adapter, for variable -> adp
     private lateinit var fabNewRecurringTask : FloatingActionButton
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
