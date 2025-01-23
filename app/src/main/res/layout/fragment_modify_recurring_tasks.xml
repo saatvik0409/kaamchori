@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark_white"
-    tools:context=".FragmentRecurringTaskModify">
+    tools:context=".FragmentTasksRecurringModify">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/modify_recurring_task_desc"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
             android:text="@string/modify_recurring_task"
             android:textSize="30sp"
             android:fontFamily="@font/montserratsemibold"

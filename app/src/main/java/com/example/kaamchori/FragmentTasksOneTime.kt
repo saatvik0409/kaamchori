@@ -13,7 +13,7 @@ import com.example.kaamchori.adapters.AdapterOneTimeTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class FragmentOneTimeTask : Fragment() {
+class FragmentTasksOneTime : Fragment() {
 
     private lateinit var tvTitle : TextView
     private lateinit var rvTasks : RecyclerView
@@ -36,7 +36,9 @@ class FragmentOneTimeTask : Fragment() {
         tvTitle.text = "One Time Tasks"
 
         adpOneTimeTasks = AdapterOneTimeTasks(GlobalVariables.oneTimeTasksList) {position ->
-            findNavController().navigate(R.id.oneTimeTasksModifyFragment)
+            val bundle = Bundle()
+            bundle.putInt("oneTimeTaskIndex",position)
+            findNavController().navigate(R.id.oneTimeTasksModifyFragment,bundle)
         }
 
         rvTasks.adapter = adpOneTimeTasks

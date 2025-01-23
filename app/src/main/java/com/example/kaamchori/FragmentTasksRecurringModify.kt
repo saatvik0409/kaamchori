@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
-import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDate
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
+import com.example.kaamchori.utils.getYearMonthDay
+import com.example.kaamchori.utils.yearMonthDayToDate
 import com.google.android.material.textfield.TextInputEditText
-import java.util.Date
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,14 +24,15 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FragmentRecurringTasksNew.newInstance] factory method to
+ * Use the [FragmentTasksRecurringModify.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentRecurringTasksNew : Fragment() {
+class FragmentTasksRecurringModify : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+    private var thisRecurringTaskIndex : Int = 0
     private lateinit var thisRecurringTask : StructureRecurringTasks
     private lateinit var etDescription : TextInputEditText
     private lateinit var dpStartDate : DatePicker
@@ -39,13 +40,13 @@ class FragmentRecurringTasksNew : Fragment() {
     private lateinit var etFrequency : TextInputEditText
     private lateinit var tbStatus : ToggleButton
     private lateinit var btSave : Button
-    private lateinit var tvTitle : TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+            thisRecurringTaskIndex = it.getInt("clickedRecurringTask")
+            thisRecurringTask = GlobalVariables.recurringTasksList[thisRecurringTaskIndex]
         }
     }
 
@@ -60,7 +61,6 @@ class FragmentRecurringTasksNew : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvTitle = view.findViewById(R.id.modify_recurring_task_desc)
         etDescription = view.findViewById(R.id.modify_recurring_task_title_edit_text)
         dpStartDate = view.findViewById(R.id.modify_recurring_task_start_date)
         dpEndDate = view.findViewById(R.id.modify_recurring_task_end_date)
@@ -68,31 +68,37 @@ class FragmentRecurringTasksNew : Fragment() {
         tbStatus = view.findViewById(R.id.modify_recurring_task_status)
         btSave = view.findViewById(R.id.modify_recurring_task_save)
 
-        tvTitle.setText("New Recurring Task")
+        etDescription.setText(thisRecurringTask.taskDescription)
+
+        val startDate = getYearMonthDay(thisRecurringTask.startDate)
+        dpStartDate.updateDate(
+            startDate.year,
+            startDate.month,
+            startDate.day
+        )
+        val endDate = getYearMonthDay(thisRecurringTask.endDate)
+        dpEndDate.updateDate(
+            endDate.year,
+            endDate.month,
+            endDate.day
+        )
+        etFrequency.setText(thisRecurringTask.frequency.toString())
+        tbStatus.isChecked = thisRecurringTask.status
 
         btSave.setOnClickListener {
-
             val startDateStructure = StructureDate(
                 dpStartDate.year,
-                dpStartDate.month,
+                dpStartDate.month+1,
                 dpStartDate.dayOfMonth
             )
-            val startDateInstance = Date(
-                startDateStructure.year,
-                startDateStructure.month,
-                startDateStructure.day
-            )
+            val startDateInstance = yearMonthDayToDate(startDateStructure)
 
             val endDateStructure = StructureDate(
                 dpEndDate.year,
-                dpEndDate.month,
+                dpEndDate.month+1,
                 dpEndDate.dayOfMonth
             )
-            val endDateInstance = Date(
-                endDateStructure.year,
-                endDateStructure.month,
-                endDateStructure.day
-            )
+            val endDateInstance = yearMonthDayToDate(endDateStructure)
 
             val newRecurringTask = StructureRecurringTasks(
                 etDescription.text.toString(),
@@ -102,16 +108,17 @@ class FragmentRecurringTasksNew : Fragment() {
                 tbStatus.isChecked
             )
 
-            GlobalVariables.recurringTasksList.add(0,newRecurringTask)
+            GlobalVariables.recurringTasksList[thisRecurringTaskIndex] = newRecurringTask
             findNavController().navigate(
                 R.id.recurringTasksFragment,
                 null,
                 NavOptions.Builder()
-                    .setPopUpTo(R.id.fragmentNewRecurringTask, true) // Removes currentFragment from back stack
+                    .setPopUpTo(R.id.fragmentModifyRecurringTasks, true) // Removes currentFragment from back stack
                     .build()
-                )
+            )
         }
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -119,16 +126,19 @@ class FragmentRecurringTasksNew : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentRecurringTasksNew.
+         * @return A new instance of fragment FragmentModifyRecurringTask.
          */
         // TODO: Rename and change types and number of parameters
+        private var TAG = "FRAGMENT_MODIFY_RECURRING_TASKS"
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FragmentRecurringTasksNew().apply {
+            FragmentTasksRecurringModify().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
     }
+
+
 }

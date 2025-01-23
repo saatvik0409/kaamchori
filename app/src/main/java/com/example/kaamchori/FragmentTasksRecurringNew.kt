@@ -1,6 +1,5 @@
 package com.example.kaamchori
 
-import android.app.ActionBar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -15,7 +15,6 @@ import com.example.kaamchori.models.StructureDate
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.google.android.material.textfield.TextInputEditText
-import java.util.Calendar
 import java.util.Date
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,15 +24,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FragmentRecurringTaskModify.newInstance] factory method to
+ * Use the [FragmentTasksRecurringNew.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentRecurringTaskModify : Fragment() {
+class FragmentTasksRecurringNew : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private var thisRecurringTaskIndex : Int = 0
     private lateinit var thisRecurringTask : StructureRecurringTasks
     private lateinit var etDescription : TextInputEditText
     private lateinit var dpStartDate : DatePicker
@@ -41,13 +39,13 @@ class FragmentRecurringTaskModify : Fragment() {
     private lateinit var etFrequency : TextInputEditText
     private lateinit var tbStatus : ToggleButton
     private lateinit var btSave : Button
+    private lateinit var tvTitle : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-            thisRecurringTaskIndex = it.getInt("clickedRecurringTask")
-            thisRecurringTask = GlobalVariables.recurringTasksList[thisRecurringTaskIndex]
         }
     }
 
@@ -62,6 +60,7 @@ class FragmentRecurringTaskModify : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tvTitle = view.findViewById(R.id.modify_recurring_task_desc)
         etDescription = view.findViewById(R.id.modify_recurring_task_title_edit_text)
         dpStartDate = view.findViewById(R.id.modify_recurring_task_start_date)
         dpEndDate = view.findViewById(R.id.modify_recurring_task_end_date)
@@ -69,24 +68,10 @@ class FragmentRecurringTaskModify : Fragment() {
         tbStatus = view.findViewById(R.id.modify_recurring_task_status)
         btSave = view.findViewById(R.id.modify_recurring_task_save)
 
-        etDescription.setText(thisRecurringTask.taskDescription)
-
-        val startDate = getYearMonthDay(thisRecurringTask.startDate)
-        dpStartDate.updateDate(
-            startDate.year,
-            startDate.month,
-            startDate.day
-        )
-        val endDate = getYearMonthDay(thisRecurringTask.endDate)
-        dpEndDate.updateDate(
-            endDate.year,
-            endDate.month,
-            endDate.day
-        )
-        etFrequency.setText(thisRecurringTask.frequency.toString())
-        tbStatus.isChecked = thisRecurringTask.status
+        tvTitle.setText("New Recurring Task")
 
         btSave.setOnClickListener {
+
             val startDateStructure = StructureDate(
                 dpStartDate.year,
                 dpStartDate.month,
@@ -117,20 +102,16 @@ class FragmentRecurringTaskModify : Fragment() {
                 tbStatus.isChecked
             )
 
-            GlobalVariables.recurringTasksList[thisRecurringTaskIndex] = newRecurringTask
+            GlobalVariables.recurringTasksList.add(0,newRecurringTask)
             findNavController().navigate(
                 R.id.recurringTasksFragment,
                 null,
                 NavOptions.Builder()
-                    .setPopUpTo(R.id.fragmentModifyRecurringTasks, true) // Removes currentFragment from back stack
+                    .setPopUpTo(R.id.fragmentNewRecurringTask, true) // Removes currentFragment from back stack
                     .build()
-            )
+                )
         }
-
-
-
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -138,28 +119,16 @@ class FragmentRecurringTaskModify : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentModifyRecurringTask.
+         * @return A new instance of fragment FragmentRecurringTasksNew.
          */
         // TODO: Rename and change types and number of parameters
-        private var TAG = "FRAGMENT_MODIFY_RECURRING_TASKS"
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FragmentRecurringTaskModify().apply {
+            FragmentTasksRecurringNew().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    fun getYearMonthDay (dateInstance: Date) : StructureDate{
-        val calendar = Calendar.getInstance()
-        calendar.time = dateInstance
-
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) // Adding 1 since Calendar.MONTH is 0-based
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        return StructureDate(year,month,day)
     }
 }

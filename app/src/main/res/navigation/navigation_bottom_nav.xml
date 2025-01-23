@@ -25,31 +25,31 @@
 
     <fragment
         android:id="@+id/recurringTasksFragment"
-        android:name="com.example.kaamchori.FragmentRecurringTasks"
+        android:name="com.example.kaamchori.FragmentTasksRecurring"
         android:label="RecurringTasks"
         tools:layout="@layout/fragment_recurring_tasks"/>
 
     <fragment
         android:id="@+id/fragmentModifyRecurringTasks"
-        android:name="com.example.kaamchori.FragmentRecurringTaskModify"
+        android:name="com.example.kaamchori.FragmentTasksRecurringModify"
         android:label="ModifyRecurringTasks"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 
     <fragment
         android:id="@+id/fragmentNewRecurringTask"
-        android:name="com.example.kaamchori.FragmentRecurringTasksNew"
+        android:name="com.example.kaamchori.FragmentTasksRecurringNew"
         android:label="NewRecurringTask"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 
     <fragment
         android:id="@+id/oneTimeTasksFragment"
-        android:name="com.example.kaamchori.FragmentOneTimeTask"
+        android:name="com.example.kaamchori.FragmentTasksOneTime"
         android:label="One Time Task"
         tools:layout="@layout/fragment_recurring_tasks"/>
 
     <fragment
         android:id="@+id/oneTimeTasksModifyFragment"
-        android:name="com.example.kaamchori.FragmentOneTimeTasksModify"
+        android:name="com.example.kaamchori.FragmentTasksOneTimeModify"
         android:label="One Time Task Modify"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 

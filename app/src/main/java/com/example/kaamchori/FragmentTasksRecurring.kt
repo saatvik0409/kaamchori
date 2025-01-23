@@ -10,10 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaamchori.adapters.AdapterRecurringTasks
-import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.Date
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,10 +20,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FragmentRecurringTasks.newInstance] factory method to
+ * Use the [FragmentTasksRecurring.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentRecurringTasks : Fragment() {
+class FragmentTasksRecurring : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -76,7 +74,7 @@ class FragmentRecurringTasks : Fragment() {
         private val TAG = "FRAGMENT_RECURRING_TASKS"
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FragmentRecurringTasks().apply {
+            FragmentTasksRecurring().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
