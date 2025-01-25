@@ -60,7 +60,7 @@ class FragmentTasks : Fragment() {
         }
 
         tasks_card_multiple.setOnClickListener {
-
+            findNavController().navigate(R.id.multipleTasksFragment)
         }
 
     }

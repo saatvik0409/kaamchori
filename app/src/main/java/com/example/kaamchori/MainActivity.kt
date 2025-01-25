@@ -22,6 +22,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         GlobalVariables.recurringTasksList = generateRecurringTasks()
         GlobalVariables.oneTimeTasksList = generateRandomTasks()
+        GlobalVariables.multipleTasksList = generateMultipleTasks()
     }
 
 
@@ -147,6 +149,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun generateMultipleTasks(): MutableList<StructureMultipleTasks> {
+        val tasks = mutableListOf<StructureMultipleTasks>()
+
+        repeat(10) {
+            val taskDescription = "Task ${it + 1}"
+            val startDate = Date()
+            val endDate = Date(System.currentTimeMillis() + Random.nextInt(10) * (24 * 60 * 60 * 1000L)) // Up to 10 days from now
+            val totalQty = Random.nextInt(100) + 1  // Random quantity between 1 and 100
+            val status = Random.nextInt(2)  // 0 or 1, assuming 0 = not completed, 1 = completed
+
+            tasks.add(
+                StructureMultipleTasks(
+                    taskDescription = taskDescription,
+                    startDate = startDate,
+                    endDate = endDate,
+                    totalQty = totalQty,
+                    status = status
+                )
+            )
+        }
+
+        return tasks
+    }
 
 }
 

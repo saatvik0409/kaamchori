@@ -53,5 +53,16 @@
         android:label="One Time Task Modify"
         tools:layout="@layout/fragment_modify_recurring_tasks"/>
 
+    <fragment
+        android:id="@+id/multipleTasksFragment"
+        android:name="com.example.kaamchori.FragmentTasksMultiple"
+        android:label="Multiple Tasks Fragment"
+        tools:layout="@layout/fragment_recurring_tasks"/>
+
+    <fragment
+        android:id="@+id/multipleTasksFragmentModify"
+        android:name="com.example.kaamchori.FragmentTasksMultipleModify"
+        android:label="Multiple Tasks Fragment Modify"
+        tools:layout="@layout/fragment_modify_tasks_multiple"/>
 
 </navigation>

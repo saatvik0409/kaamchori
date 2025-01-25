@@ -4,7 +4,6 @@
     <string name="One_time_tasks">One Time Tasks</string>
     <string name="Recurring_Tasks_Title">Recurring Tasks</string>
     <string name="test_button">Test button</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sample_date">10/11/12</string>
     <string name="r_period">R_Period</string>
@@ -12,6 +11,11 @@
     <string name="TaskDescription">Task Description</string>
     <string name="startDate">Start Date</string>
     <string name="endDate">End Date</string>
+    <string name="multipleTask">Multiple Tasks</string>
     <string name="frequency">Frequency</string>
     <string name="modify_recurring_task">Modify Recurring Task</string>
+    <string name="modify_multiple_task">Modify Multiple Task</string>
+    <string name="completed">Completed</string>
+    <string name="remaining">Remaining</string>
+    <string name="total">Total</string>
 </resources>
