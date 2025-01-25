@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.kaamchori.models.StructureDate
+import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.google.android.material.textfield.TextInputEditText
@@ -72,7 +72,7 @@ class FragmentTasksRecurringNew : Fragment() {
 
         btSave.setOnClickListener {
 
-            val startDateStructure = StructureDate(
+            val startDateStructure = StructureDateTime(
                 dpStartDate.year,
                 dpStartDate.month,
                 dpStartDate.dayOfMonth
@@ -83,7 +83,7 @@ class FragmentTasksRecurringNew : Fragment() {
                 startDateStructure.day
             )
 
-            val endDateStructure = StructureDate(
+            val endDateStructure = StructureDateTime(
                 dpEndDate.year,
                 dpEndDate.month,
                 dpEndDate.dayOfMonth
@@ -107,7 +107,7 @@ class FragmentTasksRecurringNew : Fragment() {
                 R.id.recurringTasksFragment,
                 null,
                 NavOptions.Builder()
-                    .setPopUpTo(R.id.fragmentNewRecurringTask, true) // Removes currentFragment from back stack
+                    .setPopUpTo(R.id.recurringTasksFragment, true) // Removes currentFragment from back stack
                     .build()
                 )
         }

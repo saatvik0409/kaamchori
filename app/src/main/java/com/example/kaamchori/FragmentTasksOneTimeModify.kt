@@ -10,7 +10,7 @@ import android.widget.DatePicker
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.kaamchori.models.StructureDate
+import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.example.kaamchori.utils.getYearMonthDay
@@ -73,14 +73,14 @@ class FragmentTasksOneTimeModify : Fragment() {
         tbStatus.isChecked = thisOneTimeTask.status
 
         btSave.setOnClickListener {
-            val startDateStructure = StructureDate(
+            val startDateStructure = StructureDateTime(
                 dpStartDate.year,
                 dpStartDate.month+1,
                 dpStartDate.dayOfMonth
             )
             val startDateInstance = yearMonthDayToDate(startDateStructure)
 
-            val endDateStructure = StructureDate(
+            val endDateStructure = StructureDateTime(
                 dpEndDate.year,
                 dpEndDate.month+1,
                 dpEndDate.dayOfMonth
@@ -100,7 +100,7 @@ class FragmentTasksOneTimeModify : Fragment() {
                 R.id.oneTimeTasksFragment,
                 null,
                 NavOptions.Builder()
-                    .setPopUpTo(R.id.oneTimeTasksModifyFragment, true) // Removes currentFragment from back stack
+                    .setPopUpTo(R.id.oneTimeTasksFragment, true) // Removes currentFragment from back stack
                     .build()
             )
         }

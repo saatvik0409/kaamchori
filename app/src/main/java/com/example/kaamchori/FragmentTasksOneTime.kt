@@ -44,6 +44,10 @@ class FragmentTasksOneTime : Fragment() {
         rvTasks.adapter = adpOneTimeTasks
         rvTasks.layoutManager = LinearLayoutManager(requireContext())
 
+        fabNewTasks.setOnClickListener {
+            findNavController().navigate(R.id.oneTimeTasksNewFragment)
+        }
+
     }
     companion object {
         private val TAG = "FRAGMENT_ONE_TIME_TASKS"

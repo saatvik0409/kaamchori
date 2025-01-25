@@ -12,30 +12,18 @@ import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
-import com.example.kaamchori.utils.getYearMonthDay
 import com.example.kaamchori.utils.yearMonthDayToDate
 import com.google.android.material.textfield.TextInputEditText
 
 
-class FragmentTasksMultipleModify : Fragment() {
+class FragmentTasksMultipleNew : Fragment() {
 
-    private var indexMultipleTask : Int = 0
-
-    private lateinit var thisMultipleTask : StructureMultipleTasks
     private lateinit var etTaskDescription: TextInputEditText
     private lateinit var etCompleted : TextInputEditText
     private lateinit var etTotal : TextInputEditText
     private lateinit var startDatePicker: DatePicker
     private lateinit var endDatePicker: DatePicker
     private lateinit var btSave : Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {it ->
-            indexMultipleTask = it.getInt("indexMultipleTask")
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,22 +40,6 @@ class FragmentTasksMultipleModify : Fragment() {
         etCompleted = view.findViewById(R.id.modify_multiple_completed_edit_text)
         etTotal = view.findViewById(R.id.modify_multiple_total_edit_text)
         btSave = view.findViewById(R.id.modify_recurring_task_save)
-
-        thisMultipleTask = GlobalVariables.multipleTasksList[indexMultipleTask]
-
-        etTaskDescription.setText(thisMultipleTask.taskDescription)
-        val startDate = getYearMonthDay(thisMultipleTask.startDate)
-        val endDate = getYearMonthDay(thisMultipleTask.endDate)
-
-        startDatePicker.updateDate(
-            startDate.year,startDate.month,startDate.day
-        )
-        endDatePicker.updateDate(
-            endDate.year,endDate.month,endDate.day
-        )
-
-        etCompleted.setText(thisMultipleTask.status.toString())
-        etTotal.setText(thisMultipleTask.totalQty.toString())
 
         btSave.setOnClickListener {
             val startDateStructure = StructureDateTime(
@@ -91,7 +63,7 @@ class FragmentTasksMultipleModify : Fragment() {
                 etTotal.text.toString().toInt(),
                 etCompleted.text.toString().toInt()
             )
-            GlobalVariables.multipleTasksList[indexMultipleTask] = newMultipleTask
+            GlobalVariables.multipleTasksList.add(0,newMultipleTask)
             findNavController().navigate(
                 R.id.multipleTasksFragment,
                 null,
@@ -101,10 +73,9 @@ class FragmentTasksMultipleModify : Fragment() {
             )
         }
 
-
     }
 
     companion object {
-        private val TAG = "FRAGMENT_TASKS_MULTIPLE_MODIFY"
+        private val TAG = "FRAGMENT_TASKS_MULTIPLE_NEW"
     }
 }

@@ -18,4 +18,10 @@
     <string name="completed">Completed</string>
     <string name="remaining">Remaining</string>
     <string name="total">Total</string>
+    <string name="hour_start">Hour Start</string>
+    <string name="hour_end">Hour End</string>
+    <string name="minute_start">Minute Start</string>
+    <string name="minute_end">Minute End</string>
+    <string name="second_start">Second Start</string>
+    <string name="second_end">Second End</string>
 </resources>

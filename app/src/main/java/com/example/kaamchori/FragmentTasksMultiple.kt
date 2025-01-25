@@ -45,6 +45,9 @@ class FragmentTasksMultiple : Fragment() {
             findNavController().navigate(R.id.multipleTasksFragmentModify,bundle)
         }
 
+        fabNewTask.setOnClickListener {
+            findNavController().navigate(R.id.multipleTasksFragmentNew)
+        }
         rvTasks.adapter = adpMultipleTasks
         rvTasks.layoutManager = LinearLayoutManager(requireContext())
 
