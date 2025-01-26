@@ -12,6 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
+import com.example.kaamchori.utils.DatePickerDialogOpener
+import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.getDateString
+import com.example.kaamchori.utils.getTimeString
 import com.example.kaamchori.utils.yearMonthDayToDate
 import com.google.android.material.textfield.TextInputEditText
 
@@ -21,8 +25,10 @@ class FragmentTasksMultipleNew : Fragment() {
     private lateinit var etTaskDescription: TextInputEditText
     private lateinit var etCompleted : TextInputEditText
     private lateinit var etTotal : TextInputEditText
-    private lateinit var startDatePicker: DatePicker
-    private lateinit var endDatePicker: DatePicker
+    private lateinit var startDatePicker: Button
+    private lateinit var endDatePicker: Button
+    private lateinit var tpStartTime : Button
+    private lateinit var tpEndTime : Button
     private lateinit var btSave : Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,26 +46,38 @@ class FragmentTasksMultipleNew : Fragment() {
         etCompleted = view.findViewById(R.id.modify_multiple_completed_edit_text)
         etTotal = view.findViewById(R.id.modify_multiple_total_edit_text)
         btSave = view.findViewById(R.id.modify_recurring_task_save)
+        tpStartTime = view.findViewById(R.id.modify_recurring_task_start_time)
+        tpEndTime = view.findViewById(R.id.modify_recurring_task_end_time)
+
+        var startDate = StructureDateTime()
+        var endDate = StructureDateTime()
+
+        startDatePicker.setText(getDateString(startDate))
+        endDatePicker.setText(getDateString(endDate))
+        tpStartTime.setText(getTimeString(startDate))
+        tpEndTime.setText(getTimeString(endDate))
+
+        startDatePicker.setOnClickListener {
+            DatePickerDialogOpener(requireContext(),startDate,startDatePicker)
+        }
+
+        endDatePicker.setOnClickListener {
+            DatePickerDialogOpener(requireContext(),endDate,endDatePicker)
+        }
+
+        tpStartTime.setOnClickListener {
+            TimePickerDialogOpener(requireContext(),startDate,tpStartTime)
+        }
+
+        tpEndTime.setOnClickListener {
+            TimePickerDialogOpener(requireContext(),endDate,tpEndTime)
+        }
 
         btSave.setOnClickListener {
-            val startDateStructure = StructureDateTime(
-                startDatePicker.year,
-                startDatePicker.month+1,
-                startDatePicker.dayOfMonth
-            )
-            val startDateInstance = yearMonthDayToDate(startDateStructure)
-
-            val endDateStructure = StructureDateTime(
-                endDatePicker.year,
-                endDatePicker.month+1,
-                endDatePicker.dayOfMonth
-            )
-            val endDateInstance = yearMonthDayToDate(endDateStructure)
-
             val newMultipleTask = StructureMultipleTasks(
                 etTaskDescription.text.toString(),
-                startDateInstance,
-                endDateInstance,
+                startDate,
+                endDate,
                 etTotal.text.toString().toInt(),
                 etCompleted.text.toString().toInt()
             )

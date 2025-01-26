@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.kaamchori.R
 import com.example.kaamchori.models.StructureMultipleTasks
+import com.example.kaamchori.utils.getDateString
+import com.example.kaamchori.utils.getTimeString
 import java.text.SimpleDateFormat
 
 class AdapterMultipleTasks (
@@ -23,6 +25,9 @@ class AdapterMultipleTasks (
         val tvStartDate : TextView = itemView.findViewById(R.id.item_recurring_tasks_start)
         val tvEndDate : TextView = itemView.findViewById(R.id.item_recurring_tasks_end)
         val tvStatus : TextView = itemView.findViewById(R.id.item_recurring_tasks_status)
+        val tvFrequency : TextView = itemView.findViewById(R.id.item_recurring_tasks_cycle)
+        val tv_start_time : TextView = itemView.findViewById(R.id.item_recurring_tasks_start_time)
+        val tv_end_time : TextView = itemView.findViewById(R.id.item_recurring_tasks_end_time)
 
         fun bind (position: Int){
             itemView.setOnClickListener {
@@ -42,10 +47,13 @@ class AdapterMultipleTasks (
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentTask= tasksList[position]
+        holder.tvFrequency.visibility = View.GONE
         holder.tvDesc.text =currentTask.taskDescription
-        holder.tvStartDate.text = SimpleDateFormat("dd/MM/yy").format(currentTask.startDate)
-        holder.tvEndDate.text = SimpleDateFormat("dd/MM/yy").format(currentTask.endDate)
+        holder.tvStartDate.text = getDateString(currentTask.startDate)
+        holder.tvEndDate.text = getDateString(currentTask.endDate)
         holder.tvStatus.text = "${currentTask.status}/${currentTask.totalQty}"
+        holder.tv_start_time.text = getTimeString(currentTask.startDate)
+        holder.tv_end_time.text = getTimeString(currentTask.endDate)
         holder.bind(position)
     }
 }

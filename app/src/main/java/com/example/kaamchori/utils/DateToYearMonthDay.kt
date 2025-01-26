@@ -9,7 +9,7 @@ fun getYearMonthDay (dateInstance: Date) : StructureDateTime {
     calendar.time = dateInstance
 
     val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH) // Adding 1 since Calendar.MONTH is 0-based
+    val month = calendar.get(Calendar.MONTH)+1 // Adding 1 since Calendar.MONTH is 0-based
     val day = calendar.get(Calendar.DAY_OF_MONTH)
     val hour = calendar.get(Calendar.HOUR_OF_DAY) // 24-hour format
     val minute = calendar.get(Calendar.MINUTE)

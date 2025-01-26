@@ -13,14 +13,20 @@ import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
+import com.example.kaamchori.utils.DatePickerDialogOpener
+import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.getDateString
+import com.example.kaamchori.utils.getTimeString
 import com.example.kaamchori.utils.yearMonthDayToDate
 import com.google.android.material.textfield.TextInputEditText
 
 class FragmentTasksOneTimeNew : Fragment() {
 
     private lateinit var etDescription : TextInputEditText
-    private lateinit var dpStartDate : DatePicker
-    private lateinit var dpEndDate : DatePicker
+    private lateinit var dpStartDate : Button
+    private lateinit var dpEndDate : Button
+    private lateinit var tpStartTime : Button
+    private lateinit var tpEndTime : Button
     private lateinit var etFrequency : TextInputEditText
     private lateinit var tbStatus : ToggleButton
     private lateinit var btSave : Button
@@ -38,32 +44,46 @@ class FragmentTasksOneTimeNew : Fragment() {
         etDescription = view.findViewById(R.id.modify_recurring_task_title_edit_text)
         dpStartDate = view.findViewById(R.id.modify_recurring_task_start_date)
         dpEndDate = view.findViewById(R.id.modify_recurring_task_end_date)
+        tpStartTime = view.findViewById(R.id.modify_recurring_task_start_time)
+        tpEndTime = view.findViewById(R.id.modify_recurring_task_end_time)
         etFrequency = view.findViewById(R.id.modify_recurring_task_frequency_edit_text)
         tbStatus = view.findViewById(R.id.modify_recurring_task_status)
         btSave = view.findViewById(R.id.modify_recurring_task_save)
 
         etFrequency.visibility = View.GONE
 
+        var startDate = StructureDateTime()
+        var endDate = StructureDateTime()
+
+        dpStartDate.setText(getDateString(startDate))
+        tpStartTime.setText(getTimeString(startDate))
+
+        dpEndDate.setText(getDateString(endDate))
+        tpEndTime.setText(getTimeString(endDate))
+
+        dpStartDate.setOnClickListener {
+            DatePickerDialogOpener(requireContext(),startDate,dpStartDate)
+        }
+
+        dpEndDate.setOnClickListener {
+            DatePickerDialogOpener(requireContext(),endDate,dpEndDate)
+        }
+
+        tpStartTime.setOnClickListener {
+            TimePickerDialogOpener(requireContext(),startDate,tpStartTime)
+        }
+
+        tpEndTime.setOnClickListener {
+            TimePickerDialogOpener(requireContext(),endDate,tpEndTime)
+        }
+
+
         btSave.setOnClickListener {
-            val startDateStructure = StructureDateTime(
-                dpStartDate.year,
-                dpStartDate.month+1,
-                dpStartDate.dayOfMonth
-            )
-            val startDateInstance = yearMonthDayToDate(startDateStructure)
-
-            val endDateStructure = StructureDateTime(
-                dpEndDate.year,
-                dpEndDate.month+1,
-                dpEndDate.dayOfMonth
-            )
-
-            val endDateInstance = yearMonthDayToDate(endDateStructure)
 
             val newOneTimeTask = StructureOneTimeTasks(
                 etDescription.text.toString(),
-                startDateInstance,
-                endDateInstance,
+                startDate,
+                endDate,
                 tbStatus.isChecked
             )
 
