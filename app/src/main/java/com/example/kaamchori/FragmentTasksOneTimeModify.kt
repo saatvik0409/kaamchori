@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.example.kaamchori.utils.DatePickerDialogOpener
 import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.compareDateTime
 import com.example.kaamchori.utils.getDateString
 import com.example.kaamchori.utils.getTimeString
 import com.example.kaamchori.utils.getYearMonthDay
@@ -68,11 +70,11 @@ class FragmentTasksOneTimeModify : Fragment() {
         etDescription.setText(thisOneTimeTask.taskDescription)
         tbStatus.isChecked = thisOneTimeTask.status
 
-        val startDate = thisOneTimeTask.startDate
+        val startDate = thisOneTimeTask.startDate.copy()
         dpStartDate.setText(getDateString(startDate))
         tpStartTime.setText(getTimeString(startDate))
 
-        val endDate = thisOneTimeTask.endDate
+        val endDate = thisOneTimeTask.endDate.copy()
         dpEndDate.setText(getDateString(endDate))
         tpEndTime.setText(getTimeString(endDate))
 
@@ -94,6 +96,11 @@ class FragmentTasksOneTimeModify : Fragment() {
         }
 
         btSave.setOnClickListener {
+            if (!compareDateTime(startDate,endDate)){
+                Toast.makeText(requireContext(),"Start date/time must be later than end date/time",
+                    Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val newOneTimeTask = StructureOneTimeTasks(
                 etDescription.text.toString(),

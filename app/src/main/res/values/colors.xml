@@ -11,4 +11,5 @@
     <color name="riple_color">#FFFFFFFF</color>
     <color name="greenish_cyan">#FF2AAAB7</color>
     <color name="light_black">#FF555555</color>
+    <color name="light_red">#FFdb7672</color>
 </resources>

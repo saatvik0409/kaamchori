@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDateTime
@@ -14,6 +15,8 @@ import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.example.kaamchori.utils.DatePickerDialogOpener
 import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.compareDateTime
+import com.example.kaamchori.utils.generateQueue
 import com.example.kaamchori.utils.getDateString
 import com.example.kaamchori.utils.getTimeString
 import com.example.kaamchori.utils.yearMonthDayToDate
@@ -74,6 +77,12 @@ class FragmentTasksMultipleNew : Fragment() {
         }
 
         btSave.setOnClickListener {
+            if (!compareDateTime(startDate,endDate)){
+                Toast.makeText(requireContext(),"Start date/time must be later than end date/time",
+                    Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val newMultipleTask = StructureMultipleTasks(
                 etTaskDescription.text.toString(),
                 startDate,
@@ -82,6 +91,7 @@ class FragmentTasksMultipleNew : Fragment() {
                 etCompleted.text.toString().toInt()
             )
             GlobalVariables.multipleTasksList.add(0,newMultipleTask)
+
             findNavController().navigate(
                 R.id.multipleTasksFragment,
                 null,

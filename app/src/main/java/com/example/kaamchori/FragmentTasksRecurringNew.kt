@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,9 @@ import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.example.kaamchori.utils.DatePickerDialogOpener
 import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.compareDateTime
+import com.example.kaamchori.utils.getDateString
+import com.example.kaamchori.utils.getTimeString
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Date
 
@@ -56,6 +60,12 @@ class FragmentTasksRecurringNew : Fragment() {
         var startDate = StructureDateTime()
         var endDate = StructureDateTime()
 
+        dpStartDate.setText(getDateString(startDate))
+        tpStartTime.setText(getTimeString(startDate))
+
+        dpEndDate.setText(getDateString(endDate))
+        tpEndTime.setText(getTimeString(endDate))
+
         dpStartDate.setOnClickListener {
             DatePickerDialogOpener(requireContext(),startDate,dpStartDate)
         }
@@ -73,6 +83,11 @@ class FragmentTasksRecurringNew : Fragment() {
         }
 
         btSave.setOnClickListener {
+
+            if (!compareDateTime(startDate,endDate)){
+                Toast.makeText(requireContext(),"Start date/time must be later than end date/time",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val newRecurringTask = StructureRecurringTasks(
                 etDescription.text.toString(),

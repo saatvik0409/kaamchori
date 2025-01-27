@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background (unfilled area) -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" /> <!-- Round the ends -->
+            <solid android:color="#00FF00" /> <!-- Green -->
+        </shape>
+    </item>
+
+    <!-- Progress (filled area) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="20dp" /> <!-- Round the ends -->
+                <solid android:color="#FF0000" /> <!-- Red -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>

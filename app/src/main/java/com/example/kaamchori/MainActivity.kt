@@ -59,84 +59,84 @@ class MainActivity : AppCompatActivity() {
 
         // Set up the BottomNavigationView with the NavController for navigation
         navView.setupWithNavController(navController)
-        GlobalVariables.recurringTasksList = generateRecurringTasks()
-        GlobalVariables.oneTimeTasksList = generateRandomTasks()
-        GlobalVariables.multipleTasksList = generateMultipleTasks()
+//        GlobalVariables.recurringTasksList = generateRecurringTasks()
+//        GlobalVariables.oneTimeTasksList = generateRandomTasks()
+//        GlobalVariables.multipleTasksList = generateMultipleTasks()
     }
 
 
-    fun generateRecurringTasks(): MutableList<StructureRecurringTasks> {
-        val taskDescriptions = listOf(
-            "Write a report",
-            "Attend a meeting",
-            "Complete a project",
-            "Make a phone call",
-            "Send an email",
-            "Schedule a doctor's appointment",
-            "Go grocery shopping",
-            "Exercise",
-            "Read a book",
-            "Clean the house"
-        )
-
-        return MutableList(10) {
-            StructureRecurringTasks(
-                taskDescription = taskDescriptions[Random.nextInt(taskDescriptions.size)],
-                startDate = StructureDateTime(), // Random start date within last 24 hours
-                endDate = StructureDateTime(), // Random end date within next 7 days
-                frequency = Random.nextInt(10,100),
-                status = Random.nextBoolean() // Randomly set status as completed or not
-            )
-        }
-    }
-
-    fun generateRandomTasks(): MutableList<StructureOneTimeTasks> {
-        val taskDescriptions = listOf(
-            "Write a report",
-            "Attend a meeting",
-            "Complete a project",
-            "Make a phone call",
-            "Send an email",
-            "Schedule a doctor's appointment",
-            "Go grocery shopping",
-            "Exercise",
-            "Read a book",
-            "Clean the house"
-        )
-
-        return MutableList(10) {
-            StructureOneTimeTasks(
-                taskDescription = taskDescriptions[Random.nextInt(taskDescriptions.size)],
-                startDate = StructureDateTime(), // Random start date within last 24 hours
-                endDate = StructureDateTime(), // Random end date within next 7 days
-                status = Random.nextBoolean() // Randomly set status as completed or not
-            )
-        }
-    }
-
-    fun generateMultipleTasks(): MutableList<StructureMultipleTasks> {
-        val tasks = mutableListOf<StructureMultipleTasks>()
-
-        repeat(10) {
-            val taskDescription = "Task ${it + 1}"
-            val startDate = StructureDateTime()
-            val endDate = StructureDateTime() // Up to 10 days from now
-            val totalQty = Random.nextInt(100) + 1  // Random quantity between 1 and 100
-            val status = Random.nextInt(2)  // 0 or 1, assuming 0 = not completed, 1 = completed
-
-            tasks.add(
-                StructureMultipleTasks(
-                    taskDescription = taskDescription,
-                    startDate = startDate,
-                    endDate = endDate,
-                    totalQty = totalQty,
-                    status = status
-                )
-            )
-        }
-
-        return tasks
-    }
+//    fun generateRecurringTasks(): MutableList<StructureRecurringTasks> {
+//        val taskDescriptions = listOf(
+//            "Write a report",
+//            "Attend a meeting",
+//            "Complete a project",
+//            "Make a phone call",
+//            "Send an email",
+//            "Schedule a doctor's appointment",
+//            "Go grocery shopping",
+//            "Exercise",
+//            "Read a book",
+//            "Clean the house"
+//        )
+//
+//        return MutableList(10) {
+//            StructureRecurringTasks(
+//                taskDescription = taskDescriptions[Random.nextInt(taskDescriptions.size)],
+//                startDate = StructureDateTime(), // Random start date within last 24 hours
+//                endDate = StructureDateTime(), // Random end date within next 7 days
+//                frequency = Random.nextInt(10,100),
+//                status = Random.nextBoolean() // Randomly set status as completed or not
+//            )
+//        }
+//    }
+//
+//    fun generateRandomTasks(): MutableList<StructureOneTimeTasks> {
+//        val taskDescriptions = listOf(
+//            "Write a report",
+//            "Attend a meeting",
+//            "Complete a project",
+//            "Make a phone call",
+//            "Send an email",
+//            "Schedule a doctor's appointment",
+//            "Go grocery shopping",
+//            "Exercise",
+//            "Read a book",
+//            "Clean the house"
+//        )
+//
+//        return MutableList(10) {
+//            StructureOneTimeTasks(
+//                taskDescription = taskDescriptions[Random.nextInt(taskDescriptions.size)],
+//                startDate = StructureDateTime(), // Random start date within last 24 hours
+//                endDate = StructureDateTime(), // Random end date within next 7 days
+//                status = Random.nextBoolean() // Randomly set status as completed or not
+//            )
+//        }
+//    }
+//
+//    fun generateMultipleTasks(): MutableList<StructureMultipleTasks> {
+//        val tasks = mutableListOf<StructureMultipleTasks>()
+//
+//        repeat(10) {
+//            val taskDescription = "Task ${it + 1}"
+//            val startDate = StructureDateTime()
+//            val endDate = StructureDateTime() // Up to 10 days from now
+//            val totalQty = Random.nextInt(100) + 1  // Random quantity between 1 and 100
+//            val status = Random.nextInt(2)  // 0 or 1, assuming 0 = not completed, 1 = completed
+//
+//            tasks.add(
+//                StructureMultipleTasks(
+//                    taskDescription = taskDescription,
+//                    startDate = startDate,
+//                    endDate = endDate,
+//                    totalQty = totalQty,
+//                    status = status
+//                )
+//            )
+//        }
+//
+//        return tasks
+//    }
 
 }
 

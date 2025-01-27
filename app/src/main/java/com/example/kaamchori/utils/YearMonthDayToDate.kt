@@ -10,6 +10,6 @@ fun yearMonthDayToDate(date: StructureDateTime): Date {
     YEAR/MONTH/DAY format
      */
     val calendar = Calendar.getInstance()
-    calendar.set(date.year, date.month-1, date.day,date.hour,date.minute,date.second) // Subtract 1 from month because Calendar months are 0-based
+    calendar.set(date.year, date.month-1, date.day,date.hour,date.minute,0) // Subtract 1 from month because Calendar months are 0-based
     return calendar.time
 }

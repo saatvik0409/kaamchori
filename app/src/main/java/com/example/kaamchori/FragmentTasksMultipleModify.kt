@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.kaamchori.models.StructureDateTime
@@ -14,6 +15,7 @@ import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
 import com.example.kaamchori.utils.DatePickerDialogOpener
 import com.example.kaamchori.utils.TimePickerDialogOpener
+import com.example.kaamchori.utils.compareDateTime
 import com.example.kaamchori.utils.getDateString
 import com.example.kaamchori.utils.getTimeString
 import com.example.kaamchori.utils.getYearMonthDay
@@ -64,8 +66,8 @@ class FragmentTasksMultipleModify : Fragment() {
         thisMultipleTask = GlobalVariables.multipleTasksList[indexMultipleTask]
 
         etTaskDescription.setText(thisMultipleTask.taskDescription)
-        val startDate = thisMultipleTask.startDate
-        val endDate = thisMultipleTask.endDate
+        val startDate = thisMultipleTask.startDate.copy()
+        val endDate = thisMultipleTask.endDate.copy()
 
         startDatePicker.setText(getDateString(startDate))
         endDatePicker.setText(getDateString(endDate))
@@ -94,6 +96,11 @@ class FragmentTasksMultipleModify : Fragment() {
 
 
         btSave.setOnClickListener {
+            if (!compareDateTime(startDate,endDate)){
+                Toast.makeText(requireContext(),"Start date/time must be later than end date/time",
+                    Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val newMultipleTask = StructureMultipleTasks(
                 etTaskDescription.text.toString(),
