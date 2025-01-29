@@ -6,6 +6,7 @@ import android.os.Parcelable
 import java.util.Date
 
 data class StructureRecurringTasks(
+    var id : Long  = -1,
     var taskDescription: String = "",
     var startDate: StructureDateTime = StructureDateTime(),  // Current date/time
     var endDate: StructureDateTime = StructureDateTime(), // 7 days from now

@@ -12,6 +12,7 @@ import android.widget.ToggleButton
 import androidx.compose.material3.DatePickerDialog
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.kaamchori.database.DatabaseManager
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureRecurringTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
@@ -108,14 +109,17 @@ class FragmentTasksRecurringModify : Fragment() {
             }
 
             val newRecurringTask = StructureRecurringTasks(
+                thisRecurringTask.id,
                 etDescription.text.toString(),
                 startDate,
                 endDate,
                 etFrequency.text.toString().toInt(),
                 tbStatus.isChecked
             )
-
+            val dbManager = DatabaseManager(requireContext())
+            dbManager.updateRecurringTask(newRecurringTask)
             GlobalVariables.recurringTasksList[thisRecurringTaskIndex] = newRecurringTask
+
             findNavController().navigate(
                 R.id.recurringTasksFragment,
                 null,

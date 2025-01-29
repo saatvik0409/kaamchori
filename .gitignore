@@ -4,6 +4,7 @@
 *.png
 *.jpg
 *.jpeg
+*.apk
 /local.properties
 /.idea/caches
 /.idea/libraries

@@ -53,6 +53,9 @@ fun generateQueue() {
     }
 
     for ((i,task) in GlobalVariables.multipleTasksList.withIndex()){
+
+        Log.i("GENERATE_QUEUE", "${task.taskDescription}, ${task.status}, ${task.totalQty}")
+
         if (task.status == task.totalQty) continue
         val startTime : Date = yearMonthDayToDate(task.startDate)
         val endTime : Date = yearMonthDayToDate(task.endDate)

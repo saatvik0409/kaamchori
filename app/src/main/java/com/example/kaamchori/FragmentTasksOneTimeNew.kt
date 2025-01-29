@@ -11,6 +11,7 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.kaamchori.database.DatabaseManager
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureOneTimeTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
@@ -88,12 +89,15 @@ class FragmentTasksOneTimeNew : Fragment() {
             }
 
             val newOneTimeTask = StructureOneTimeTasks(
+                -1,
                 etDescription.text.toString(),
                 startDate,
                 endDate,
                 tbStatus.isChecked
             )
 
+            val dbManager = DatabaseManager(requireContext())
+            dbManager.insertOneTimeTask(newOneTimeTask)
             GlobalVariables.oneTimeTasksList.add(0,newOneTimeTask)
             findNavController().navigate(
                 R.id.oneTimeTasksFragment,

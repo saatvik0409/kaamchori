@@ -10,6 +10,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.kaamchori.database.DatabaseManager
 import com.example.kaamchori.models.StructureDateTime
 import com.example.kaamchori.models.StructureMultipleTasks
 import com.example.kaamchori.singletonClass.GlobalVariables
@@ -103,12 +104,16 @@ class FragmentTasksMultipleModify : Fragment() {
             }
 
             val newMultipleTask = StructureMultipleTasks(
+                thisMultipleTask.id,
                 etTaskDescription.text.toString(),
                 startDate,
                 endDate,
-                etTotal.text.toString().toInt(),
-                etCompleted.text.toString().toInt()
-            )
+                etCompleted.text.toString().toInt(),
+                etTotal.text.toString().toInt()
+                )
+
+            val dbManager = DatabaseManager(requireContext())
+            dbManager.updateMultipleTask(newMultipleTask)
             GlobalVariables.multipleTasksList[indexMultipleTask] = newMultipleTask
             findNavController().navigate(
                 R.id.multipleTasksFragment,
